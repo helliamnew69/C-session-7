@@ -1,20 +1,39 @@
 #include <stdio.h>
+#include <math.h>
 
 int main() {
-    int n, dao = 0, temp;
-
+    int n, temp, soChuSo = 0, tong = 0;
+    
     printf("Nhap so nguyen n: ");
     scanf("%d", &n);
 
-    temp = n;
-
-    while (temp != 0) {
-        int chuSo = temp % 10;       // L?y ch? s? cu?i
-        dao = dao * 10 + chuSo;      // Thêm ch? s? dó vào s? d?o ngu?c
-        temp /= 10;                  // B? ch? s? cu?i
+    if (n < 0) {
+        printf("Vui long nhap so nguyen duong!\n");
+        return 0;
     }
 
-    printf("So dao nguoc la: %d\n", dao);
+    temp = n;
+
+    // Ð?m s? ch? s? c?a n
+    int dem = n;
+    while (dem != 0) {
+        soChuSo++;
+        dem /= 10;
+    }
+
+    // Tính t?ng các luy th?a b?c soChuSo c?a t?ng ch? s?
+    dem = n;
+    while (dem != 0) {
+        int chuSo = dem % 10;
+        tong += pow(chuSo, soChuSo);
+        dem /= 10;
+    }
+
+    // So sánh
+    if (tong == n)
+        printf("%d la so Armstrong.\n", n);
+    else
+        printf("%d khong phai la so Armstrong.\n", n);
 
     return 0;
 }
